@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+  postgis:
+    build:
+      context: ./.config/postgis 
+    image: chikaj/geoapi_postgis
+    container_name: geoapi_postgis
+    env_file: 
+      - ./.config/postgis/postgis.env 
+    volumes: 
+      - postgis_data:/var/lib/postgresql/data
+      - ./data:/work
+    hostname: geoapi_postgis
+    networks:
+      - postgrest_network
+    ports: 
+      - 5555:5432
+    working_dir: /work
+
+  pgadmin:
+    build:
+      context: ./.config/pgadmin4
+    image: chikaj/geoapi_pgadmin4
+    container_name: geoapi_pgadmin4
+    env_file: 
+      - ./.config/pgadmin4/pgadmin.env
+    volumes: 
+      # - pgadmin4_data:/var/lib/pgadmin
+      - ./pgsql:/var/lib/pgadmin/storage:Z
+    depends_on:
+      - postgis
+    hostname: geoapi_pgadmin4
+    networks: 
+      - postgrest_network
+    ports: 
+      - 5050:80
+
+  postgrest:
+    # build:
+    #   context: ./.config/postgrest
+    image: postgrest/postgrest:v10.1.1
+    container_name: geoapi_postgrest
+    env_file:
+      - ./.config/postgrest/postgrest.env
+    depends_on:
+      - postgis
+    hostname: geoapi_postgrest
+    networks:
+      - postgrest_network
+    ports:
+      - 3000:3000
+  
+  # swagger:
+  #   image: swaggerapi/swagger-ui
+  #   container_name: geoapi_swagger
+  #   env_file:
+  #     - ./.config/swagger/swagger.env
+  #   depends_on:
+  #     - postgrest
+  #   hostname: geoapi_swagger
+  #   networks:
+  #     - postgrest_network
+  #   ports:
+  #     - "8080:8080"
+
+networks: 
+  postgrest_network:
+
+volumes: 
+  postgis_data:
+  # pgadmin4_data:

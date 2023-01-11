@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  postgis:
+    image: chikaj/postgis-mega:0.1
+    container_name: postgis
+    env_file: 
+      - .env 
+    volumes: 
+      - postgis_data:/var/lib/postgresql/data
+    hostname: postgis
+    networks:
+      - db_network
+    ports: 
+      - 5432:5432
+
+networks: 
+  db_network:
+
+volumes: 
+  postgis_data:
