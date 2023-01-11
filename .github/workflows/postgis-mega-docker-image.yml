@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file ../../db/Dockerfile --tag my-mega-postgis:$(date +%s)
+      run: docker build . --file ./db/Dockerfile --tag my-mega-postgis:$(date +%s)
