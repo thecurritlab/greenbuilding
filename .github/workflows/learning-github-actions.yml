@@ -67,22 +67,22 @@ jobs:
 #           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test env.REGISTRY variable
-        run: echo Registry: ${{ env.REGISTRY }}
+        run: echo Registry - ${{ env.REGISTRY }}
         
       - name: Test github.actor variable
-        run: echo Username: ${{ github.actor }}
+        run: echo Username - ${{ github.actor }}
       
       - name: Test secrets.GITHUB_TOKEN variable
-        run: echo Password (aka github token): ${{ secrets.GITHUB_TOKEN }}
+        run: echo Password - (aka github token) ${{ secrets.GITHUB_TOKEN }}
       
       - name: Test env.REGISTRY and env.IMAGE_NAME variables
-        run: echo images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        run: echo images - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       
       - name: Test steps.meta.outputs.tags variable
-        run: echo Tags: ${{ steps.meta.outputs.tags }}
+        run: echo Tags - ${{ steps.meta.outputs.tags }}
       
       - name: Test steps.meta.outputs.labels variable
-        run: echo Labels: ${{ steps.meta.outputs.labels }}
+        run: echo Labels - ${{ steps.meta.outputs.labels }}
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
