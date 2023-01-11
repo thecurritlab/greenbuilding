@@ -73,7 +73,7 @@ jobs:
         run: echo Username - ${{ github.actor }}
       
       - name: Test secrets.GITHUB_TOKEN variable
-        run: echo Password - (aka github token) ${{ secrets.GITHUB_TOKEN }}
+        run: echo Password aka github token - ${{ secrets.GITHUB_TOKEN }}
       
       - name: Test env.REGISTRY and env.IMAGE_NAME variables
         run: echo images - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
