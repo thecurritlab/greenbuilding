@@ -11,8 +11,6 @@ services:
     hostname: ${PROJECT_PREFIX}_postgis
     networks:
       - db_network
-    ports: 
-      - 5432:5432
 
 networks: 
   db_network:
