@@ -25,8 +25,6 @@
         padding-left: 25px;
     }
 </style> -->
-
-
 # **Project <green>_greenbuilding_</green>** :deciduous_tree:
 
 ### GREEN ROOF BUILDING PROJECTS
