@@ -11,6 +11,28 @@ services:
     hostname: ${PROJECT_PREFIX}_postgis
     networks:
       - db_network
+  
+  postgrest:
+    image: ${POSTGREST_IMAGE}
+    container_name: ${PROJECT_PREFIX}_postgrest
+    env_file:
+      - ./envs/postgrest.env
+    depends_on:
+      - postgis
+    hostname: ${PROJECT_PREFIX}_postgrest
+    networks:
+      - db_network
+  
+  kit:
+    image: ${SVELTEKIT_IMAGE}
+    container_name: ${PROJECT_PREFIX}_svelte
+    env_file:
+      - ./envs/sveltekit.env
+    depends_on:
+      - postgrest
+    hostname: ${PROJECT_PREFIX}_svelte
+    networks:
+      - db_network
 
 networks: 
   db_network:

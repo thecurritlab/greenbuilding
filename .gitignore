@@ -1,2 +1,5 @@
 .monokle
-dev/**
+dev/*/**
+
+**/node_modules
+./kit/app/.svelte-kit

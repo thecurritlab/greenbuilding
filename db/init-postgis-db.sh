@@ -22,7 +22,7 @@ for DB in template_postgis "$POSTGRES_DB"; do
 		CREATE SCHEMA $POSTGRES_USER AUTHORIZATION $POSTGRES_USER;
 		CREATE EXTENSION IF NOT EXISTS postgis SCHEMA postgis;
     	CREATE EXTENSION IF NOT EXISTS postgis_raster SCHEMA postgis;
-		ALTER DATABASE postgres SET search_path = "\$user", public, postgis;
+		-- ALTER DATABASE postgres SET search_path = "\$user", public, postgis;
 		ALTER DATABASE postgres SET postgis.enable_outdb_rasters = true;
 		ALTER DATABASE postgres SET postgis.gdal_enabled_drivers TO 'ENABLE_ALL';
 	EOSQL
