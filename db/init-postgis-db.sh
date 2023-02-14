@@ -18,12 +18,13 @@ EOSQL
 for DB in template_postgis "$POSTGRES_DB"; do
 	echo "Loading PostGIS extensions into $DB"
 	${psql[@]} --dbname="$DB" <<-EOSQL
-    	CREATE SCHEMA postgis;
-		CREATE SCHEMA $POSTGRES_USER AUTHORIZATION $POSTGRES_USER;
+		DROP SCHEMA public CASCADE;
+    	CREATE SCHEMA extensions;
+		CREATE SCHEMA postgis;
 		CREATE EXTENSION IF NOT EXISTS postgis SCHEMA postgis;
     	CREATE EXTENSION IF NOT EXISTS postgis_raster SCHEMA postgis;
-		-- ALTER DATABASE postgres SET search_path = "\$user", public, postgis;
-		ALTER DATABASE postgres SET postgis.enable_outdb_rasters = true;
-		ALTER DATABASE postgres SET postgis.gdal_enabled_drivers TO 'ENABLE_ALL';
+		ALTER DATABASE $DB SET search_path = extensions, postgis;
+		ALTER DATABASE $DB SET postgis.enable_outdb_rasters = true;
+		ALTER DATABASE $DB SET postgis.gdal_enabled_drivers TO 'ENABLE_ALL';
 	EOSQL
 done

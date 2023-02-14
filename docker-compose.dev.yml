@@ -15,8 +15,8 @@ services:
     container_name: ${PROJECT_PREFIX}_pgadmin4
     env_file:
       - envs/pgadmin.env
-    volumes: 
-      - ./dev/sql:/var/lib/pgadmin/storage
+    # volumes: 
+    #   - ./dev/sql:/var/lib/pgadmin/storage
     depends_on:
       - postgis
     hostname: ${PROJECT_PREFIX}_pgadmin4
@@ -25,11 +25,11 @@ services:
     ports: 
       - 5050:80
   
-  kit:
-    image: ${NODE_IMAGE}
-    volumes: 
-      - ./kit/app:/app
-    working_dir: /app
-    ports:
-      - 5173:5173
+  # kit:
+  #   image: ${NODE_IMAGE}
+  #   volumes: 
+  #     - ./kit/app:/app
+  #   working_dir: /app
+  #   ports:
+  #     - 5173:5173
 

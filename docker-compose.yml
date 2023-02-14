@@ -23,16 +23,16 @@ services:
     networks:
       - db_network
   
-  kit:
-    image: ${SVELTEKIT_IMAGE}
-    container_name: ${PROJECT_PREFIX}_svelte
-    env_file:
-      - ./envs/sveltekit.env
-    depends_on:
-      - postgrest
-    hostname: ${PROJECT_PREFIX}_svelte
-    networks:
-      - db_network
+  # kit:
+  #   image: ${SVELTEKIT_IMAGE}
+  #   container_name: ${PROJECT_PREFIX}_svelte
+  #   env_file:
+  #     - ./envs/sveltekit.env
+  #   depends_on:
+  #     - postgrest
+  #   hostname: ${PROJECT_PREFIX}_svelte
+  #   networks:
+  #     - db_network
 
 networks: 
   db_network:
