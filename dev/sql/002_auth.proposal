@@ -1,0 +1,15 @@
+Preface:
+
+Currently PostgREST authentication requires a JWT signed with (1) role=<user> that is (2) signed with 
+the app-wide JWT_secret. The authenticator (this is all done in the Haskell source code) decrypts the 
+JWT and, if it is valid, does SET ROLE <user> which sets the current_user to <user> until the end of 
+the request. This works fine for its purpose, but does not allow easy invalidation of a (malicious?) 
+JWT. Having a JWT_secret stored in a database table for each user would allow that secret to be deleted 
+if were used by a malicious user without affecting any other users (because a change in the app-wide 
+JWT_secret would affect every user). It would also allow for use of both access and refresh tokens.
+
+Possible solutions:
+
+1. After login, every user receives a JWT with (1) role=authenticator that is (2) signed with the 
+   app-wide JWT_secret. The authenticator (Haskell source code) will change the user to authenticator
+   (which has SET ROLE permissions)

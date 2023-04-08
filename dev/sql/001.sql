@@ -33,7 +33,8 @@ CREATE TYPE auth.jwt_token AS (
     role text,
     exp integer,
     username citext,
-    id_admin boolean
+	email text,
+    is_admin boolean
 );
 
 -- DROP FUNCTION IF EXISTS auth.current_username;
@@ -143,6 +144,7 @@ CREATE OR REPLACE FUNCTION api.login(
 		RETURN v_token;
 	END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
+GRANT EXECUTE ON FUNCTION api.login TO anonymous;
 
 /*
 ##### Function to delete user account and remove user schema and role
